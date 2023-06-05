@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 export class RedisMessagesExchange {
   constructor(private readonly redisService: RedisService) {}
 
-  async sendRequestMessage(queue: string, messageBody: any) {
+  async sendRequestMessage(queue: string, data: any) {
     const requestId = uuidv4();
     const client = this.redisService.getClient();
 
@@ -33,10 +33,7 @@ export class RedisMessagesExchange {
       client.on('message', onResponse);
     });
 
-    await client.publish(
-      queue,
-      JSON.stringify({ requestId, body: messageBody }),
-    );
+    await client.publish(queue, JSON.stringify({ requestId, data }));
 
     const response = await responsePromise;
 
