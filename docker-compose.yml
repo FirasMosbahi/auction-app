@@ -1,0 +1,55 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: ./apps/auction-app
+      dockerfile: Dockerfile
+    volumes:
+      - ./apps/auction-app:/usr/src/app
+    ports:
+      - 3000:3000
+    depends_on:
+      - item
+      - auth
+      - bid
+      - redis
+      - mongo
+
+  item:
+    build:
+      context: ./apps/item
+      dockerfile: Dockerfile
+    volumes:
+      - ./apps/item:/usr/src/app
+    depends_on:
+      - redis
+      - mongo
+
+  auth:
+    build:
+      context: ./apps/auth
+      dockerfile: Dockerfile
+    volumes:
+      - ./apps/auth:/usr/src/app
+    depends_on:
+      - redis
+
+  bid:
+    build:
+      context: ./apps/bid
+      dockerfile: Dockerfile
+    volumes:
+      - ./apps/bid:/usr/src/app
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - 27017:27017
