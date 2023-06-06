@@ -5,16 +5,16 @@ import {
 } from '@nestjs/common';
 import { UserDto } from './dto/user.dto';
 import * as bcrypt from 'bcrypt';
-import { AbstractRepository } from '@app/common/database/abstract.repository';
 import { User } from '@app/common/database/user.schema';
 import { RedisMessagesExchange } from '@app/common/redis/redis-messages-exchange';
 import { JwtService } from '@nestjs/jwt';
 import { UpdateUserDto } from './dto/update.user.dto';
+import { UserRepository } from '@app/common/database/user.repository';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly userRepository: AbstractRepository<User>,
+    private readonly userRepository: UserRepository,
     private readonly redisMessageExchange: RedisMessagesExchange,
     private readonly jwtService: JwtService,
   ) {}
@@ -29,7 +29,7 @@ export class AuthService {
     const user = await this.userRepository.findOne({
       username: userDto.username,
     });
-    if (User) {
+    if (user) {
       const match: boolean = await bcrypt.compare(
         userDto.password,
         user.password,

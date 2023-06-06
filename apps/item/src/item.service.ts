@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { AbstractRepository } from '@app/common/database/abstract.repository';
 import { Item } from '@app/common/database/item.schema';
+import { ItemRepository } from '@app/common/database/item.repository';
 import { User } from '@app/common/database/user.schema';
 
 @Injectable()
 export class ItemService {
-  constructor(private readonly itemRepository: AbstractRepository<Item>) {}
+  constructor(private readonly itemRepository: ItemRepository) {}
   async createItem(item) {
     return await this.itemRepository.create(item);
   }

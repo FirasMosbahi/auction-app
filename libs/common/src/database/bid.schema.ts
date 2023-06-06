@@ -1,4 +1,4 @@
-import { Prop, Schema } from '@nestjs/mongoose';
+import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 import { SchemaTypes } from 'mongoose';
 import { AbstractDocument } from '@app/common/database/abstract.schema';
 import { User } from '@app/common/database/user.schema';
@@ -17,3 +17,4 @@ export class Bid extends AbstractDocument {
   @Prop({ default: Date.now })
   timestamp: Date;
 }
+export const BidSchema = SchemaFactory.createForClass(Bid);

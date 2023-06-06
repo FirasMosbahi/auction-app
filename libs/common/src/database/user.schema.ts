@@ -1,4 +1,4 @@
-import { Prop, Schema } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { AbstractDocument } from '@app/common/database/abstract.schema';
 @Schema()
 export class User extends AbstractDocument {
@@ -8,3 +8,4 @@ export class User extends AbstractDocument {
   @Prop({ required: true })
   password: string;
 }
+export const UserSchema = SchemaFactory.createForClass(User);

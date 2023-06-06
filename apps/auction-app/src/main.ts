@@ -3,18 +3,17 @@ import { AppModule } from './app.module';
 import { Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
-  async function bootstrap() {
-    const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule);
+  console.log(1);
+  app.connectMicroservice({
+    transport: Transport.REDIS,
+    options: {
+      host: 'localhost',
+      port: 6379,
+    },
+  });
+  console.log(2);
 
-    app.connectMicroservice({
-      transport: Transport.REDIS,
-      options: {
-        url: 'redis://localhost:6379',
-      },
-    });
-
-    await app.startAllMicroservices();
-    await app.listen(3000);
-  }
+  await app.listen(3000);
 }
 bootstrap();

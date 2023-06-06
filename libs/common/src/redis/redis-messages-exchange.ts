@@ -10,7 +10,7 @@ export class RedisMessagesExchange {
     this.client = ClientProxyFactory.create({
       transport: Transport.REDIS,
       options: {
-        host: 'redis://localhost',
+        host: 'localhost',
         port: 6379,
       },
     });

@@ -3,8 +3,8 @@ version: '3.7'
 services:
   app:
     build:
-      context: ./apps/auction-app
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: apps/auction-app/Dockerfile
     volumes:
       - ./apps/auction-app:/usr/src/app
     ports:
@@ -18,8 +18,8 @@ services:
 
   item:
     build:
-      context: ./apps/item
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: apps/item/Dockerfile
     volumes:
       - ./apps/item:/usr/src/app
     depends_on:
@@ -28,8 +28,8 @@ services:
 
   auth:
     build:
-      context: ./apps/auth
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: apps/auth/Dockerfile
     volumes:
       - ./apps/auth:/usr/src/app
     depends_on:
@@ -37,8 +37,8 @@ services:
 
   bid:
     build:
-      context: ./apps/bid
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: apps/bid/Dockerfile
     volumes:
       - ./apps/bid:/usr/src/app
     depends_on:
