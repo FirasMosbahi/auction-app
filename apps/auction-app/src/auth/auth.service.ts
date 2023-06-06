@@ -18,17 +18,10 @@ export class AuthService {
       userDto,
     );
   }
-  async logout(id: string) {
-    return await this.redisMessageExchange.sendRequestMessage(
-      'logout-user',
-      id,
-    );
-  }
   async manageProfile(id: string, updateUserDto: UpdateUserDto) {
     return await this.redisMessageExchange.sendRequestMessage('update-user', {
       id,
-      username: updateUserDto.username,
-      password: updateUserDto.password,
+      credentials: updateUserDto,
     });
   }
 }
