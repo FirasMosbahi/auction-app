@@ -16,14 +16,14 @@ export class Item extends AbstractDocument {
   @Prop({ required: true })
   published: boolean;
 
-  @Prop({ required: true })
-  draft: boolean;
-
   @Prop({ type: [{ type: SchemaTypes.ObjectId, ref: 'User' }] })
   bidders: User[];
 
   @Prop({ type: SchemaTypes.ObjectId, ref: 'User' })
   highestBidder: User;
+
+  @Prop({ type: SchemaTypes.ObjectId, ref: 'User', required: true })
+  owner: User;
 
   @Prop({ required: true })
   endTime: Date;
