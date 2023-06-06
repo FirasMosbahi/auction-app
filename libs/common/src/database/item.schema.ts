@@ -16,8 +16,8 @@ export class Item extends AbstractDocument {
   @Prop({ required: true })
   published: boolean;
 
-  @Prop({ type: [{ type: SchemaTypes.ObjectId, ref: 'User' }] })
-  bidders: User[];
+  @Prop({ required: true })
+  closed: boolean;
 
   @Prop({ type: SchemaTypes.ObjectId, ref: 'User' })
   highestBidder: User;

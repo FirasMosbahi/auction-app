@@ -53,7 +53,10 @@ export class AuthService {
   }
   verifyAuthentification(token: string) {
     try {
-      return this.jwtService.verify(token).id;
+      const id = this.jwtService.verify(token).id;
+      if (id) {
+        return this.userRepository.findOne({ _id: id });
+      }
     } catch (error) {}
     return null;
   }

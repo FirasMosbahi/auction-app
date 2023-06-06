@@ -13,6 +13,7 @@ export class ItemService {
       owner,
       ...itemDto,
       published: false,
+      closed: false,
     });
   }
   async publishItem(itemId: string) {
