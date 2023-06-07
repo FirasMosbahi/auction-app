@@ -41,7 +41,7 @@ export class BidService {
     return await this.bidRepository.find(
       { item: itemId },
       sort,
-      Number.parseInt(searchOptions.take) + Number.parseInt(searchOptions.skip),
+      Number.parseInt(searchOptions.take),
       Number.parseInt(searchOptions.skip),
     );
   }

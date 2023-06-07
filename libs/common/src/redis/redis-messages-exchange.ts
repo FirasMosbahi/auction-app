@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ClientProxyFactory, Transport } from '@nestjs/microservices';
-import { v4 as uuidv4 } from 'uuid';
 import { ConfigService } from '@nestjs/config';
 
+//An injectable class which allows sending messages to a specific queue using redis
 @Injectable()
 export class RedisMessagesExchange {
   private client;

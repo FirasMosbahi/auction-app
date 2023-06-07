@@ -1,18 +1,17 @@
 import { Controller, Get } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { UserDto } from './dto/user.dto';
-import { UpdateUserDto } from './dto/update.user.dto';
 
+//Controller which listen for the messages coming from main app auth controller
 @Controller()
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
   @MessagePattern('register-user')
-  async handleUserRegistration(@Payload() userDto: UserDto) {
+  async handleUserRegistration(@Payload() userDto) {
     return await this.authService.registerUser(userDto);
   }
   @MessagePattern('authentificate-user')
-  async handleUserAuthentification(@Payload() userDto: UserDto) {
+  async handleUserAuthentification(@Payload() userDto) {
     return await this.authService.authentificateUser(userDto);
   }
   @MessagePattern('update-user')

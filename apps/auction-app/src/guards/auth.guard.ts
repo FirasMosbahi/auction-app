@@ -1,6 +1,7 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { RedisMessagesExchange } from '@app/common/redis/redis-messages-exchange';
 
+//A guard that verify that the user who send the request is authentificated
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private readonly redisMessageExchange: RedisMessagesExchange) {}

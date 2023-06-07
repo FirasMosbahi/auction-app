@@ -3,11 +3,9 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { UserDto } from './dto/user.dto';
 import * as bcrypt from 'bcrypt';
 import { RedisMessagesExchange } from '@app/common/redis/redis-messages-exchange';
 import { JwtService } from '@nestjs/jwt';
-import { UpdateUserDto } from './dto/update.user.dto';
 import { UserRepository } from '@app/common/database/user.repository';
 
 @Injectable()
@@ -17,14 +15,14 @@ export class AuthService {
     private readonly redisMessageExchange: RedisMessagesExchange,
     private readonly jwtService: JwtService,
   ) {}
-  async registerUser(userDto: UserDto) {
+  async registerUser(userDto) {
     const hashedPassword = await bcrypt.hash(userDto.password, 10);
     return await this.userRepository.create({
       username: userDto.username,
       password: hashedPassword,
     });
   }
-  async authentificateUser(userDto: UserDto) {
+  async authentificateUser(userDto) {
     const user = await this.userRepository.findOne({
       username: userDto.username,
     });
@@ -44,7 +42,7 @@ export class AuthService {
       throw new NotFoundException('No user name with those credentials');
     }
   }
-  async manageProfile(id: string, updateUserDto: UpdateUserDto) {
+  async manageProfile(id: string, updateUserDto) {
     return await this.userRepository.findOneAndUpdate(
       { _id: id },
       updateUserDto,

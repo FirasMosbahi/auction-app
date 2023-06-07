@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { RedisMessagesExchange } from '@app/common/redis/redis-messages-exchange';
 import { BidDto } from '../dto/bid.dto';
 import { SearchOptionDto } from '../dto/search.option.dto';
-import { User } from '@app/common/database/user.schema';
 
 @Injectable()
 export class BidService {

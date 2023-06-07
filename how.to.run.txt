@@ -1,0 +1,5 @@
+to run this app please follow the following steps:
+1) install all the dependencies using : npm install
+2)configurate the .env files ( 5 .env files : 1 in each app and 1 in the library)
+3)run the three microservices using : npm run start <name>
+4)run the main app using : npm run start auction-app

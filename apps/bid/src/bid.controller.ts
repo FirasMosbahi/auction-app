@@ -2,6 +2,7 @@ import { Controller } from '@nestjs/common';
 import { BidService } from './bid.service';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 
+//A controller that listen for the messages coming from the bid controller
 @Controller()
 export class BidController {
   constructor(private readonly bidService: BidService) {}

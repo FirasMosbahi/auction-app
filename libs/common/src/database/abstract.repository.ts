@@ -9,6 +9,7 @@ import {
 } from 'mongoose';
 import { AbstractDocument } from './abstract.schema';
 
+//Abstract repository which provides the necessary functions to interact with a mongodb schema using mongoose
 export abstract class AbstractRepository<TDocument extends AbstractDocument> {
   protected abstract readonly logger: Logger;
 

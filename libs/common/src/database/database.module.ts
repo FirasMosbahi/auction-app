@@ -8,7 +8,7 @@ import { User, UserSchema } from '@app/common/database/user.schema';
 import { Item, ItemSchema } from '@app/common/database/item.schema';
 import { Bid, BidSchema } from '@app/common/database/bid.schema';
 import * as Joi from 'joi';
-
+//A module which provides interactions with mongodb database
 @Module({
   imports: [
     ConfigModule.forRoot({

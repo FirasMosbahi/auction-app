@@ -3,6 +3,7 @@ import { RedisMessagesExchange } from './redis-messages-exchange';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 
+//A module which provide the way to send messages using redis to a specefic queue
 @Module({
   imports: [
     ConfigModule.forRoot({

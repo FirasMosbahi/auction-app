@@ -1,6 +1,6 @@
 enum sortCriteria {
   latest = 'timestamp',
-  highest = 'startingPrice',
+  highest = 'actualPrice',
 }
 export class SearchOptionDto {
   sortBy: sortCriteria | null;

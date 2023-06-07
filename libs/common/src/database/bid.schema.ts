@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { SchemaTypes } from 'mongoose';
+import { SchemaTypes } from 'mongoose';
 import { AbstractDocument } from '@app/common/database/abstract.schema';
 @Schema()
 export class Bid extends AbstractDocument {

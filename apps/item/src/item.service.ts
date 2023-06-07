@@ -47,7 +47,7 @@ export class ItemService {
     return await this.itemRepository.find(
       {},
       sortBy,
-      Number.parseInt(searchOptions.take) + Number.parseInt(searchOptions.skip),
+      Number.parseInt(searchOptions.take),
       Number.parseInt(searchOptions.skip),
     );
   }
@@ -61,7 +61,7 @@ export class ItemService {
         $or: [{ closed: true }, { endTime: { $lt: new Date() } }],
       },
       sortBy,
-      Number.parseInt(searchOptions.take) + Number.parseInt(searchOptions.skip),
+      Number.parseInt(searchOptions.take),
       Number.parseInt(searchOptions.skip),
     );
   }
@@ -72,13 +72,14 @@ export class ItemService {
     }
     return await this.itemRepository.find(
       {
-        $or: [
-          { $and: [{ closed: false }, { published: true }] },
+        $and: [
+          { closed: false },
+          { published: true },
           { endTime: { $gt: new Date() } },
         ],
       },
       sortBy,
-      Number.parseInt(searchOptions.take) + Number.parseInt(searchOptions.skip),
+      Number.parseInt(searchOptions.take),
       Number.parseInt(searchOptions.skip),
     );
   }

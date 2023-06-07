@@ -1,6 +1,7 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { RedisMessagesExchange } from '@app/common/redis/redis-messages-exchange';
 
+//A guard that verify if the request sender is the owner of the item
 @Injectable()
 export class ItemOwnerGuard implements CanActivate {
   constructor(private readonly redisMessageExchange: RedisMessagesExchange) {}

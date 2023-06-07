@@ -2,6 +2,7 @@ import { Controller, Get } from '@nestjs/common';
 import { ItemService } from './item.service';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 
+//A controller that listen to the messages incoming from main app bid controller
 @Controller()
 export class ItemController {
   constructor(private readonly itemService: ItemService) {}
