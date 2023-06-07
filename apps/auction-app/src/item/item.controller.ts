@@ -48,10 +48,12 @@ export class ItemController {
     return await this.itemService.deleteItem(id);
   }
   @Get('/details/:id')
+  @UseGuards(AuthGuard)
   async getItemDetails(@Param('id') id: string) {
     return await this.itemService.getItemDetails(id);
   }
   @Get()
+  @UseGuards(AuthGuard)
   async getItems(@Query() searchOption: SearchOptionDto) {
     return await this.itemService.getItems(searchOption);
   }

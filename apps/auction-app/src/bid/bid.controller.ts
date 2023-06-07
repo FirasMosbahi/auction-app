@@ -26,10 +26,12 @@ export class BidController {
     }
   }
   @Get('/:id')
+  @UseGuards(AuthGuard)
   async getBid(@Param('id') id: string) {
     return await this.bidService.getBid(id);
   }
   @Get('/itemBids/:id')
+  @UseGuards(AuthGuard)
   async getItemsBids(
     @Param('id') id: string,
     @Query() searchOptions: SearchOptionDto,
