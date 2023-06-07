@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Param, Patch, Post, Req } from '@nestjs/common';
+import {Body, Controller, Get, Param, Patch, Post, Req, UseGuards} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserDto } from '../dto/user.dto';
 import { UpdateUserDto } from '../dto/update.user.dto';
+import {AuthGuard} from "../guards/auth.guard";
 
 @Controller('auth')
 export class AuthController {
@@ -15,6 +16,7 @@ export class AuthController {
     return await this.authService.authentificateUser(userDto);
   }
   @Patch('/manageProfile')
+  @UseGuards(AuthGuard)
   async modifyProfile(@Req() req) {
     return await this.authService.manageProfile(req.id, req.body);
   }

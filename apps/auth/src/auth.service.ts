@@ -5,7 +5,6 @@ import {
 } from '@nestjs/common';
 import { UserDto } from './dto/user.dto';
 import * as bcrypt from 'bcrypt';
-import { User } from '@app/common/database/user.schema';
 import { RedisMessagesExchange } from '@app/common/redis/redis-messages-exchange';
 import { JwtService } from '@nestjs/jwt';
 import { UpdateUserDto } from './dto/update.user.dto';
@@ -53,10 +52,8 @@ export class AuthService {
   }
   verifyAuthentification(token: string) {
     try {
-      const id = this.jwtService.verify(token).id;
-      if (id) {
-        return this.userRepository.findOne({ _id: id });
-      }
+      console.log(this.jwtService.verify(token));
+      return this.jwtService.verify(token).id;
     } catch (error) {}
     return null;
   }

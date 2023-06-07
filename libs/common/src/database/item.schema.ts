@@ -1,8 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { SchemaTypes } from 'mongoose';
+import mongoose, { SchemaTypes } from 'mongoose';
 import { AbstractDocument } from '@app/common/database/abstract.schema';
-import { User } from '@app/common/database/user.schema';
-import {Bid} from "@app/common/database/bid.schema";
 @Schema()
 export class Item extends AbstractDocument {
   @Prop({ required: true })
@@ -21,10 +19,10 @@ export class Item extends AbstractDocument {
   closed: boolean;
 
   @Prop({ type: SchemaTypes.ObjectId, ref: 'Bid' })
-  highestBid: Bid;
+  highestBid: string;
 
   @Prop({ type: SchemaTypes.ObjectId, ref: 'User', required: true })
-  owner: User;
+  owner: string;
 
   @Prop({ required: true })
   endTime: Date;

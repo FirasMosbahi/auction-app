@@ -1,9 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { AbstractRepository } from '@app/common/database/abstract.repository';
-import { Item } from '@app/common/database/item.schema';
 import { ItemRepository } from '@app/common/database/item.repository';
-import { User } from '@app/common/database/user.schema';
-
+import { Types } from 'mongoose';
 @Injectable()
 export class ItemService {
   constructor(private readonly itemRepository: ItemRepository) {}
@@ -11,25 +8,30 @@ export class ItemService {
     return await this.itemRepository.create(item);
   }
   async publishItem(itemId: string) {
+    const _id = new Types.ObjectId(itemId);
     return await this.itemRepository.findOneAndUpdate(
-      { _id: itemId },
+      { _id: _id },
       { published: true },
     );
   }
   async closeItem(itemId: string) {
+    const _id = new Types.ObjectId(itemId);
     return await this.itemRepository.findOneAndUpdate(
-      { _id: itemId },
+      { _id },
       { closed: true },
     );
   }
   async updateItem(itemId: string, data) {
-    return await this.itemRepository.findOneAndUpdate({ _id: itemId }, data);
+    const _id = new Types.ObjectId(itemId);
+    return await this.itemRepository.findOneAndUpdate({ _id: _id }, data);
   }
   async deleteItem(itemId: string) {
-    return await this.itemRepository.deleteOne({ _id: itemId });
+    const _id = new Types.ObjectId(itemId);
+    return await this.itemRepository.deleteOne({ _id: _id });
   }
   async getItemDetails(itemId: string) {
-    return await this.itemRepository.findOne({ _id: itemId });
+    const _id = new Types.ObjectId(itemId);
+    return await this.itemRepository.findOne({ _id: _id });
   }
   async getItems(searchOptions) {
     let sortBy = {};
@@ -43,8 +45,8 @@ export class ItemService {
       searchOptions.skip,
     );
   }
-  async isOwner(user: User, itemId: string) {
+  async isOwner(userId, itemId: string) {
     const item = await this.getItemDetails(itemId);
-    return item.owner._id === user._id;
+    return userId === item.owner.toString();
   }
 }

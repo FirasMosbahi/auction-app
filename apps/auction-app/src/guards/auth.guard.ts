@@ -1,5 +1,4 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { RedisMessagesExchange } from '@app/common/redis/redis-messages-exchange';
 
 @Injectable()
@@ -9,12 +8,12 @@ export class AuthGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
     const authHeader = request.headers.authorization;
-    if (authHeader && authHeader.startsWith('Bearer ')) {
-      const token = authHeader.substring(7);
+    console.log(authHeader);
+    if (authHeader) {
       try {
         const user = await this.redisMessageExchange.sendRequestMessage(
           'verify-authentification',
-          token,
+          authHeader,
         );
         if (user) {
           request.user = user;
