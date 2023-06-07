@@ -4,10 +4,10 @@ import { AbstractDocument } from '@app/common/database/abstract.schema';
 @Schema()
 export class Bid extends AbstractDocument {
   @Prop({ type: SchemaTypes.ObjectId, ref: 'User', required: true })
-  bidder: mongoose.Schema.Types.ObjectId;
+  bidder: string;
 
   @Prop({ type: SchemaTypes.ObjectId, ref: 'Item', required: true })
-  item: mongoose.Schema.Types.ObjectId;
+  item: string;
 
   @Prop({ required: true })
   price: number;

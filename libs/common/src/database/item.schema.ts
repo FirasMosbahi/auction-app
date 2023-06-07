@@ -13,6 +13,9 @@ export class Item extends AbstractDocument {
   startingPrice: number;
 
   @Prop({ required: true })
+  actualPrice: number;
+
+  @Prop({ required: true })
   published: boolean;
 
   @Prop({ required: true })
@@ -23,6 +26,9 @@ export class Item extends AbstractDocument {
 
   @Prop({ type: SchemaTypes.ObjectId, ref: 'User', required: true })
   owner: string;
+
+  @Prop({ default: Date.now })
+  timestamp: Date;
 
   @Prop({ required: true })
   endTime: Date;

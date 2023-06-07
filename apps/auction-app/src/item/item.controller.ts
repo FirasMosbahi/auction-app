@@ -47,12 +47,21 @@ export class ItemController {
   async deleteItem(@Param('id') id: string) {
     return await this.itemService.deleteItem(id);
   }
-  @Get('/:id')
+  @Get('/details/:id')
   async getItemDetails(@Param('id') id: string) {
     return await this.itemService.getItemDetails(id);
   }
   @Get()
   async getItems(@Query() searchOption: SearchOptionDto) {
     return await this.itemService.getItems(searchOption);
+  }
+  @Get('/completed')
+  async getCompletedItems(@Query() searchOptions: SearchOptionDto) {
+    return await this.itemService.getCompletedItems(searchOptions);
+  }
+  @Get('/ongoing')
+  @UseGuards(AuthGuard)
+  async getOngoingItems(@Query() searchOptions: SearchOptionDto) {
+    return await this.itemService.getOngoingItems(searchOptions);
   }
 }

@@ -1,13 +1,29 @@
-import { Controller, Get, Param, Post, Query, Req } from '@nestjs/common';
+import {
+  BadRequestException,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { BidService } from './bid.service';
 import { SearchOptionDto } from '../dto/search.option.dto';
+import { AuthGuard } from '../guards/auth.guard';
 
 @Controller('bid')
 export class BidController {
   constructor(private readonly bidService: BidService) {}
   @Post()
+  @UseGuards(AuthGuard)
   async placeBid(@Req() req) {
-    return await this.bidService.placeBid(req.user, req.body);
+    const result = await this.bidService.placeBid(req.user, req.body);
+    if (result?.result === 'error') {
+      throw new BadRequestException(result.message);
+    } else {
+      return result;
+    }
   }
   @Get('/:id')
   async getBid(@Param('id') id: string) {

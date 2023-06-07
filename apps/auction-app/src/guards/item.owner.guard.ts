@@ -1,5 +1,4 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { RedisMessagesExchange } from '@app/common/redis/redis-messages-exchange';
 
 @Injectable()

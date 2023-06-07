@@ -18,6 +18,6 @@ export class AuthController {
   @Patch('/manageProfile')
   @UseGuards(AuthGuard)
   async modifyProfile(@Req() req) {
-    return await this.authService.manageProfile(req.id, req.body);
+    return await this.authService.manageProfile(req.user, req.body);
   }
 }

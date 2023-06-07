@@ -29,12 +29,20 @@ export class ItemController {
   async handleGetItemDetails(@Payload() itemId) {
     return await this.itemService.getItemDetails(itemId);
   }
-  @MessagePattern('get-items')
+  @MessagePattern('all-items')
   async handleGetItems(@Payload() searchOptions) {
     return await this.itemService.getItems(searchOptions);
   }
   @MessagePattern('is-item-owner')
   async handleIsItemOwner(@Payload() data) {
     return await this.itemService.isOwner(data.user, data.itemId);
+  }
+  @MessagePattern('completed-items')
+  async handleGetCompletedItems(@Payload() searchOptions){
+    return await this.itemService.getCompletedItems(searchOptions);
+  }
+  @MessagePattern('ongoing-items')
+  async handleGetOngoingItems(@Payload() searchOptions){
+    return await this.itemService.getOngoingItems(searchOptions);
   }
 }

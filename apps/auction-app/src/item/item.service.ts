@@ -47,7 +47,19 @@ export class ItemService {
   }
   async getItems(searchOptions: SearchOptionDto) {
     return await this.redisMessageExchange.sendRequestMessage(
-      'get-items',
+      'all-items',
+      searchOptions,
+    );
+  }
+  async getCompletedItems(searchOptions: SearchOptionDto) {
+    return await this.redisMessageExchange.sendRequestMessage(
+      'completed-items',
+      searchOptions,
+    );
+  }
+  async getOngoingItems(searchOptions: SearchOptionDto) {
+    return await this.redisMessageExchange.sendRequestMessage(
+      'ongoing-items',
       searchOptions,
     );
   }

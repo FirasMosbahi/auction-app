@@ -8,7 +8,6 @@ export class AuthGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
     const authHeader = request.headers.authorization;
-    console.log(authHeader);
     if (authHeader) {
       try {
         const user = await this.redisMessageExchange.sendRequestMessage(

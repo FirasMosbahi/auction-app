@@ -7,23 +7,21 @@ import { User } from '@app/common/database/user.schema';
 @Injectable()
 export class BidService {
   constructor(private readonly redisMessageExchange: RedisMessagesExchange) {}
-  async placeBid(bidder: User, bidDto: BidDto) {
-    const item = await this.redisMessageExchange.sendRequestMessage(
-      'get-item-details',
-      bidDto.itemId,
-    );
+  async placeBid(bidder: string, bidDto: BidDto) {
     return await this.redisMessageExchange.sendRequestMessage('create-bid', {
-      item,
+      item: bidDto.itemId,
       price: bidDto.price,
-      timestamp: Date.now(),
       bidder,
     });
   }
   async getBids(itemId: string, searchOptions: SearchOptionDto) {
-    return await this.redisMessageExchange.sendRequestMessage('search-bids', {
-      itemId,
-      searchOptions,
-    });
+    return await this.redisMessageExchange.sendRequestMessage(
+      'search-item-bids',
+      {
+        itemId,
+        searchOptions,
+      },
+    );
   }
   async getBid(bidId: string) {
     return await this.redisMessageExchange.sendRequestMessage(
@@ -31,4 +29,5 @@ export class BidService {
       bidId,
     );
   }
+
 }
